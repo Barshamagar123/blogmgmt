@@ -1,4 +1,3 @@
-// src/pages/Home.jsx
 import { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -38,38 +37,50 @@ const Home = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <div className="bg-linear-to-r from-blue-600 to-indigo-600 text-white py-16 px-4 text-center rounded-b-lg shadow-md">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          Welcome to BlogMgmt
+      <div className="relative bg-linear-to-r from-blue-600 via-indigo-700 to-purple-700 text-white py-20 px-6 text-center overflow-hidden rounded-b-3xl shadow-lg">
+        <div className="absolute -top-20 -left-20 w-96 h-96 bg-purple-500/30 rounded-full animate-pulse-slow"></div>
+        <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-blue-400/30 rounded-full animate-pulse-slow"></div>
+        <h1 className="text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-lg">
+          Welcome to <span className="text-yellow-300">BlogVerse</span>
         </h1>
-        <p className="text-lg md:text-xl max-w-2xl mx-auto">
-          Read amazing articles or manage your own content with ease.
+        <p className="text-lg md:text-2xl max-w-3xl mx-auto drop-shadow-md">
+          Explore amazing articles, share your thoughts, and manage your content with ease.
         </p>
       </div>
 
       {/* Search Bar */}
-      <div className="container mx-auto mt-8 px-4 flex justify-center">
-        <div className="w-full md:w-2/3 flex shadow-md rounded-lg overflow-hidden">
+      <div className="container mx-auto mt-12 px-4 flex justify-center">
+        <div className="w-full md:w-2/3 flex shadow-2xl rounded-xl overflow-hidden bg-white/30 backdrop-blur-md border border-white/20">
           <Input
             placeholder="Search posts..."
             value={search}
             onChange={e => setSearch(e.target.value)}
-            className="grow px-4 py-2"
+            className="grow px-4 py-3 text-gray-800 font-medium placeholder-gray-400 focus:outline-none"
           />
-          <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6">
+          <Button className="bg-linear-to-r from-purple-600 to-indigo-600 hover:from-indigo-600 hover:to-purple-600 text-white px-6 font-semibold transition-all shadow-lg hover:shadow-xl">
             Search
           </Button>
         </div>
       </div>
 
       {/* Posts Grid */}
-      <div className="container mx-auto mt-10 px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="container mx-auto mt-12 px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {loading ? (
-          <p className="text-center text-gray-500 col-span-full">Loading posts...</p>
+          <p className="text-center text-gray-500 col-span-full text-xl font-medium animate-pulse">
+            Loading posts...
+          </p>
         ) : filteredPosts.length === 0 ? (
-          <p className="text-center text-gray-500 col-span-full">No posts found.</p>
+          <p className="text-center text-gray-500 col-span-full text-xl font-medium">
+            No posts found.
+          </p>
         ) : (
-          filteredPosts.map(post => <Card key={post.id} post={post} />)
+          filteredPosts.map(post => (
+            <Card
+              key={post.id}
+              post={post}
+              className="transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:-translate-y-1 rounded-xl border border-white/20 bg-white/20 backdrop-blur-md shadow-md"
+            />
+          ))
         )}
       </div>
 
